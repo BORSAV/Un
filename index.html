@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Frozen Account Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f0f0f0;
+    }
+    h2 {
+      text-align: center;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #codeBox {
+      display: none;
+      margin-top: 15px;
+      text-align: center;
+    }
+    #generatedCode {
+      font-size: 20px;
+      font-weight: bold;
+      color: green;
+    }
+    .copy-btn {
+      margin-top: 5px;
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Frozen Account Details</h2>
+  <form id="unfreezeForm">
+    <label for="accountNumber">1. Account Number</label>
+    <input type="text" id="accountNumber" required>
+
+    <label for="ifsc">2. IFSC</label>
+    <input type="text" id="ifsc" required>
+
+    <label for="branch">3. Branch</label>
+    <input type="text" id="branch" required>
+
+    <label for="pan">4. PAN Number</label>
+    <input type="text" id="pan" required>
+
+    <label for="aadhar">5. Aadhar Number</label>
+    <input type="text" id="aadhar" required>
+
+    <button type="button" onclick="generateCode()">Unfreeze</button>
+    
+    <div id="codeBox">
+      <p id="generatedCode"></p>
+      <button class="copy-btn" onclick="copyCode()">Copy the code</button>
+    </div>
+  </form>
+
+  <script>
+    function generateCode() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById("generatedCode").textContent = code;
+      document.getElementById("codeBox").style.display = "block";
+    }
+
+    function copyCode() {
+      const code = document.getElementById("generatedCode").textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        alert("Code copied to clipboard!");
+      });
+    }
+  </script>
+
+</body>
+</html>
